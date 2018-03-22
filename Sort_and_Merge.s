@@ -67,7 +67,7 @@ A_begin		LDR	r4, =listA
 		SUB 	r1, r5, r4 	; Loop Counter Initialization
 		LDR	r2, =listA	; Set Address of Entry 1
 		ADD	r3, r2, #4	; Address of Entry 2
-A_check		CMP	r1, #0
+A_check		CMP	r1, #4
 		BEQ	A_done
 		LDR	r4, [r2]	;Read Entry n
 		LDR	r5, [r3]	;Read Entry n + 1
@@ -90,7 +90,7 @@ B_begin		LDR	r4, =listB
 		SUB 	r1, r5, r4 	; Loop Counter Initialization
 		LDR	r2, =listB	; Set Address of Entry 1
 		ADD	r3, r2, #4	; Address of Entry 2
-B_check		CMP	r1, #0
+B_check		CMP	r1, #4
 		BEQ	B_done
 		LDR	r4, [r2]	;Read Entry n
 		LDR	r5, [r3]	;Read Entry n + 1
@@ -105,11 +105,46 @@ B_next		ADD	r2, #4
 		SUB	r1, #4
 		B	B_check
 
-B_done		NOP
+B_done	B merge_init
 
-;Merge A & B
+; Merge A & B in ascending order
+merge_init
+			LDR   r0, =listC ;Index_C
+			LDR   r1, =listA ;Index_A
+			LDR   r2, =listB ;Index_B
+			LDR   r3, =listB ;A_boundary
+			LDR   r4, =listC ;B_boundary
+			;SUB	  r3, #4
+			;SUB   r4, #4
+merge_check CMP   r1, r3
+            BGE   fill_B
+            CMP   r2, r4
+            BGE   fill_A
+            LDR   r5, [r1]   ;Load A[i]
+			LDR   r6, [r2]   ;Load B[i]
+			CMP   r5, r6
+			BLE   ins_A
+			B	  ins_B
+ins_A       STR   r5, [r0], #4
+            ADD   r1, #4
+            B     merge_check
+ins_B       STR   r6, [r0], #4
+			ADD   r2, #4
+            B     merge_check
+fill_A      CMP   r1, r3
+            BGE   merge_done
+            LDR   r5, [r1]
+            STR   r5, [r0], #4
+            ADD   r1, #4
+            B     fill_A
 
-
+fill_B      CMP   r2, r4
+            BGE   merge_done
+            LDR   r6, [r2]
+            STR   r6, [r0], #4
+            ADD   r2, #4
+            B     fill_B
+merge_done	B 	  stop
 stop		
 		B	stop		; loop here forever
 		ENDP

@@ -117,11 +117,11 @@ ARM Macro Assembler    Page 2
    49 00000000         ; Main routine
    50 00000000         __main  PROC
    51 00000000         ; Initialize allocated data
-   52 00000000 491E            LDR              r1, =|myData$$Base| ; load addr
+   52 00000000 4933            LDR              r1, =|myData$$Base| ; load addr
                                                             ess WR area
-   53 00000002 4A1F            LDR              r2, =|Load$$ER_RW$$Base| ; load
+   53 00000002 4A34            LDR              r2, =|Load$$ER_RW$$Base| ; load
                                                              addr of values
-   54 00000004 4B1F            LDR              r3, =|Load$$ER_RW$$Length|
+   54 00000004 4B34            LDR              r3, =|Load$$ER_RW$$Length|
    55 00000006         ;Copy Lists A & B into memory
    56 00000006 2B00    start_copy
                                CMP              r3, #0
@@ -140,15 +140,15 @@ ARM Macro Assembler    Page 3
                                NOP
    63 0000001A         
    64 0000001A         ;Sort List A
-   65 0000001A 4C1B    A_begin LDR              r4, =listA
-   66 0000001C 4D1B            LDR              r5, =listB
+   65 0000001A 4C30    A_begin LDR              r4, =listA
+   66 0000001C 4D30            LDR              r5, =listB
    67 0000001E EBA5 0104       SUB              r1, r5, r4  ; Loop Counter Init
                                                             ialization
-   68 00000022 4A19            LDR              r2, =listA  ; Set Address of En
+   68 00000022 4A2E            LDR              r2, =listA  ; Set Address of En
                                                             try 1
    69 00000024 F102 0304       ADD              r3, r2, #4  ; Address of Entry 
                                                             2
-   70 00000028 2900    A_check CMP              r1, #0
+   70 00000028 2904    A_check CMP              r1, #4
    71 0000002A D00D            BEQ              A_done
    72 0000002C 6814            LDR              r4, [r2]    ;Read Entry n
    73 0000002E 681D            LDR              r5, [r3]    ;Read Entry n + 1
@@ -168,15 +168,15 @@ ARM Macro Assembler    Page 3
    85 00000048 E7FF    A_done  B                B_begin
    86 0000004A         
    87 0000004A         ;Sort List B
-   88 0000004A 4C10    B_begin LDR              r4, =listB
-   89 0000004C 4D10            LDR              r5, =listC
+   88 0000004A 4C25    B_begin LDR              r4, =listB
+   89 0000004C 4D25            LDR              r5, =listC
    90 0000004E EBA5 0104       SUB              r1, r5, r4  ; Loop Counter Init
                                                             ialization
-   91 00000052 4A0E            LDR              r2, =listB  ; Set Address of En
+   91 00000052 4A23            LDR              r2, =listB  ; Set Address of En
                                                             try 1
    92 00000054 F102 0304       ADD              r3, r2, #4  ; Address of Entry 
                                                             2
-   93 00000058 2900    B_check CMP              r1, #0
+   93 00000058 2904    B_check CMP              r1, #4
    94 0000005A D00D            BEQ              B_done
    95 0000005C 6814            LDR              r4, [r2]    ;Read Entry n
    96 0000005E 681D            LDR              r5, [r3]    ;Read Entry n + 1
@@ -199,17 +199,56 @@ ARM Macro Assembler    Page 3
 ARM Macro Assembler    Page 4 
 
 
-  108 00000078 BF00    B_done  NOP
+  108 00000078 E7FF    B_done  B                merge_init
   109 0000007A         
-  110 0000007A         ;Merge A & B
-  111 0000007A         
-  112 0000007A         
-  113 0000007A         stop
-  114 0000007A E7FE            B                stop        ; loop here forever
+  110 0000007A         ; Merge A & B in ascending order
+  111 0000007A         merge_init
+  112 0000007A 481A            LDR              r0, =listC  ;Index_C
+  113 0000007C 4917            LDR              r1, =listA  ;Index_A
+  114 0000007E 4A18            LDR              r2, =listB  ;Index_B
+  115 00000080 4B17            LDR              r3, =listB  ;A_boundary
+  116 00000082 4C18            LDR              r4, =listC  ;B_boundary
+  117 00000084         ;SUB   r3, #4
+  118 00000084         ;SUB   r4, #4
+  119 00000084 4299    merge_check
+                               CMP              r1, r3
+  120 00000086 DA18            BGE              fill_B
+  121 00000088 42A2            CMP              r2, r4
+  122 0000008A DA0E            BGE              fill_A
+  123 0000008C 680D            LDR              r5, [r1]    ;Load A[i]
+  124 0000008E 6816            LDR              r6, [r2]    ;Load B[i]
+  125 00000090 42B5            CMP              r5, r6
+  126 00000092 DD00            BLE              ins_A
+  127 00000094 E004            B                ins_B
+  128 00000096 F840 5B04 
+                       ins_A   STR              r5, [r0], #4
+  129 0000009A F101 0104       ADD              r1, #4
+  130 0000009E E7F1            B                merge_check
+  131 000000A0 F840 6B04 
+                       ins_B   STR              r6, [r0], #4
+  132 000000A4 F102 0204       ADD              r2, #4
+  133 000000A8 E7EC            B                merge_check
+  134 000000AA 4299    fill_A  CMP              r1, r3
+  135 000000AC DA0D            BGE              merge_done
+  136 000000AE 680D            LDR              r5, [r1]
+  137 000000B0 F840 5B04       STR              r5, [r0], #4
+  138 000000B4 F101 0104       ADD              r1, #4
+  139 000000B8 E7F7            B                fill_A
+  140 000000BA         
+  141 000000BA 42A2    fill_B  CMP              r2, r4
+  142 000000BC DA05            BGE              merge_done
+  143 000000BE 6816            LDR              r6, [r2]
+  144 000000C0 F840 6B04       STR              r6, [r0], #4
+  145 000000C4 F102 0204       ADD              r2, #4
+  146 000000C8 E7F7            B                fill_B
+  147 000000CA E7FF    merge_done
+                               B                stop
+  148 000000CC         stop
+  149 000000CC E7FE            B                stop        ; loop here forever
                                                             
-  115 0000007C                 ENDP
-  116 0000007C                 END
-              00000000 
+  150 000000CE                 ENDP
+  151 000000CE                 END
+              00 00 00000000 
               00000000 
               00000000 
               00000000 
@@ -219,6 +258,12 @@ Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4 --apcs=interw
 ork --depend=.\objects\sort_and_merge.d -o.\objects\sort_and_merge.o -I.\RTE\_T
 arget_1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM4\Include -IC:\Ke
 il_v5\ARM\CMSIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERS
+
+
+
+ARM Macro Assembler    Page 5 
+
+
 ION SETA 524" --predefine="ARMCM4 SETA 1" --list=.\listings\sort_and_merge.lst 
 Sort_and_Merge.s
 
@@ -282,6 +327,7 @@ Symbol: listA
    Uses
       At line 65 in file Sort_and_Merge.s
       At line 68 in file Sort_and_Merge.s
+      At line 113 in file Sort_and_Merge.s
 
 listB 00000028
 
@@ -292,6 +338,8 @@ Symbol: listB
       At line 66 in file Sort_and_Merge.s
       At line 88 in file Sort_and_Merge.s
       At line 91 in file Sort_and_Merge.s
+      At line 114 in file Sort_and_Merge.s
+      At line 115 in file Sort_and_Merge.s
 
 listC 00000048
 
@@ -300,7 +348,9 @@ Symbol: listC
       At line 37 in file Sort_and_Merge.s
    Uses
       At line 89 in file Sort_and_Merge.s
-Comment: listC used once
+      At line 112 in file Sort_and_Merge.s
+      At line 116 in file Sort_and_Merge.s
+
 myData 00000000
 
 Symbol: myData
@@ -420,6 +470,72 @@ Symbol: end_copy
    Uses
       At line 57 in file Sort_and_Merge.s
 Comment: end_copy used once
+fill_A 000000AA
+
+Symbol: fill_A
+   Definitions
+      At line 134 in file Sort_and_Merge.s
+   Uses
+      At line 122 in file Sort_and_Merge.s
+      At line 139 in file Sort_and_Merge.s
+
+fill_B 000000BA
+
+Symbol: fill_B
+   Definitions
+      At line 141 in file Sort_and_Merge.s
+   Uses
+      At line 120 in file Sort_and_Merge.s
+      At line 146 in file Sort_and_Merge.s
+
+ins_A 00000096
+
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Relocatable symbols
+
+Symbol: ins_A
+   Definitions
+      At line 128 in file Sort_and_Merge.s
+   Uses
+      At line 126 in file Sort_and_Merge.s
+Comment: ins_A used once
+ins_B 000000A0
+
+Symbol: ins_B
+   Definitions
+      At line 131 in file Sort_and_Merge.s
+   Uses
+      At line 127 in file Sort_and_Merge.s
+Comment: ins_B used once
+merge_check 00000084
+
+Symbol: merge_check
+   Definitions
+      At line 119 in file Sort_and_Merge.s
+   Uses
+      At line 130 in file Sort_and_Merge.s
+      At line 133 in file Sort_and_Merge.s
+
+merge_done 000000CA
+
+Symbol: merge_done
+   Definitions
+      At line 147 in file Sort_and_Merge.s
+   Uses
+      At line 135 in file Sort_and_Merge.s
+      At line 142 in file Sort_and_Merge.s
+
+merge_init 0000007A
+
+Symbol: merge_init
+   Definitions
+      At line 111 in file Sort_and_Merge.s
+   Uses
+      At line 108 in file Sort_and_Merge.s
+Comment: merge_init used once
 myCode 00000000
 
 Symbol: myCode
@@ -436,21 +552,22 @@ Symbol: start_copy
    Uses
       At line 61 in file Sort_and_Merge.s
 Comment: start_copy used once
-stop 0000007A
+stop 000000CC
 
 Symbol: stop
-   Definitions
 
 
 
-ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
 Relocatable symbols
 
-      At line 113 in file Sort_and_Merge.s
+   Definitions
+      At line 148 in file Sort_and_Merge.s
    Uses
-      At line 114 in file Sort_and_Merge.s
-Comment: stop used once
-15 symbols
+      At line 147 in file Sort_and_Merge.s
+      At line 149 in file Sort_and_Merge.s
+
+22 symbols
 
 
 
@@ -482,4 +599,4 @@ Symbol: myData$$Base
       At line 52 in file Sort_and_Merge.s
 Comment: myData$$Base used once
 3 symbols
-363 symbols in table
+370 symbols in table

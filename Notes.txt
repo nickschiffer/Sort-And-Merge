@@ -1,7 +1,10 @@
-A: -50, -4, -2, 0, 2, 6, 6, 10, 15, 20
-B: -1, 0, 1, 1, 9, 9, 11, 20, 25
+A:  -50, 20, 6, 0, 6, -2, -4, 2, 10, 20
+B:  15, 25, 1, -1, 9, 1, 11, 9
 
-C: -50, -4, -2, -1, 0, 0, 1, 1, 2, 6, 6, 9, 9, 10, 11, 15, 20, 20, 25
+A_sorted: -50, -4, -2, 0, 2, 6, 6, 10, 20, 20
+B_sorted: -1, 1, 1, 9, 9, 11, 15, 25
+
+C: -50, -4, -2, -1, 0, 1, 1, 2, 6, 6, 9, 9, 10, 11, 15, 20, 20, 25
 
 
 //Merge: pseudocode
@@ -15,14 +18,12 @@ INSERT
 	Compare A[i] B[i]
 	if A[i]<=B[i] 
 		insert A[i] into C[i]
+		if (A_indx < A_size - 1)
+			increment A_indx
 	else
 		insert B[i] into C[i]
-NEXT
-	if (A_indx < A_size - 1)
-		increment A_indx
-	if (B_indx < B_size - 1)
-		increment B_indx
-	increment C_indx
+		if (B_indx < B_size - 1)
+			increment B_indx
 	goto CHECK
 DONE
 	NOP
