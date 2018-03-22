@@ -1,0 +1,28 @@
+A: -50, -4, -2, 0, 2, 6, 6, 10, 15, 20
+B: -1, 0, 1, 1, 9, 9, 11, 20, 25
+
+C: -50, -4, -2, -1, 0, 0, 1, 1, 2, 6, 6, 9, 9, 10, 11, 15, 20, 20, 25
+
+
+//Merge: pseudocode
+INIT
+	A_indx = A[0];
+	B_indx = B[0];
+CHECK
+	if (A_indx == A_size && B_indx == B_size)
+		goto DONE;
+INSERT
+	Compare A[i] B[i]
+	if A[i]<=B[i] 
+		insert A[i] into C[i]
+	else
+		insert B[i] into C[i]
+NEXT
+	if (A_indx < A_size - 1)
+		increment A_indx
+	if (B_indx < B_size - 1)
+		increment B_indx
+	increment C_indx
+	goto CHECK
+DONE
+	NOP
