@@ -216,11 +216,11 @@ ARM Macro Assembler    Page 4
               00000000 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4 --apcs=interw
-ork --depend=.\objects\startup.d -o.\objects\startup.o -I.\RTE\_Target_1 -IC:\K
-eil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM4\Include -IC:\Keil_v5\ARM\CMSI
-S\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 524" 
---predefine="ARMCM4 SETA 1" --list=.\listings\startup.lst ..\..\..\..\..\..\..\
-Downloads\startup.s
+ork --depend=.\objects\sort_and_merge.d -o.\objects\sort_and_merge.o -I.\RTE\_T
+arget_1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM4\Include -IC:\Ke
+il_v5\ARM\CMSIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERS
+ION SETA 524" --predefine="ARMCM4 SETA 1" --list=.\listings\sort_and_merge.lst 
+Sort_and_Merge.s
 
 
 
@@ -231,15 +231,15 @@ __Vectors 00000000
 
 Symbol: __Vectors
    Definitions
-      At line 16 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 16 in file Sort_and_Merge.s
    Uses
-      At line 15 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 15 in file Sort_and_Merge.s
 Comment: __Vectors used once
 vectors 00000000
 
 Symbol: vectors
    Definitions
-      At line 14 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 14 in file Sort_and_Merge.s
    Uses
       None
 Comment: vectors unused
@@ -254,16 +254,16 @@ Reset_Handler 00000000
 
 Symbol: Reset_Handler
    Definitions
-      At line 26 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 26 in file Sort_and_Merge.s
    Uses
-      At line 18 in file ..\..\..\..\..\..\..\Downloads\startup.s
-      At line 21 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 18 in file Sort_and_Merge.s
+      At line 21 in file Sort_and_Merge.s
 
 program 00000000
 
 Symbol: program
    Definitions
-      At line 20 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 20 in file Sort_and_Merge.s
    Uses
       None
 Comment: program unused
@@ -278,34 +278,34 @@ listA 00000000
 
 Symbol: listA
    Definitions
-      At line 35 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 35 in file Sort_and_Merge.s
    Uses
-      At line 65 in file ..\..\..\..\..\..\..\Downloads\startup.s
-      At line 68 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 65 in file Sort_and_Merge.s
+      At line 68 in file Sort_and_Merge.s
 
 listB 00000028
 
 Symbol: listB
    Definitions
-      At line 36 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 36 in file Sort_and_Merge.s
    Uses
-      At line 66 in file ..\..\..\..\..\..\..\Downloads\startup.s
-      At line 88 in file ..\..\..\..\..\..\..\Downloads\startup.s
-      At line 91 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 66 in file Sort_and_Merge.s
+      At line 88 in file Sort_and_Merge.s
+      At line 91 in file Sort_and_Merge.s
 
 listC 00000048
 
 Symbol: listC
    Definitions
-      At line 37 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 37 in file Sort_and_Merge.s
    Uses
-      At line 89 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 89 in file Sort_and_Merge.s
 Comment: listC used once
 myData 00000000
 
 Symbol: myData
    Definitions
-      At line 32 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 32 in file Sort_and_Merge.s
    Uses
       None
 Comment: myData unused
@@ -320,39 +320,39 @@ A_begin 0000001A
 
 Symbol: A_begin
    Definitions
-      At line 65 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 65 in file Sort_and_Merge.s
    Uses
-      At line 79 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 79 in file Sort_and_Merge.s
 Comment: A_begin used once
 A_check 00000028
 
 Symbol: A_check
    Definitions
-      At line 70 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 70 in file Sort_and_Merge.s
    Uses
-      At line 83 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 83 in file Sort_and_Merge.s
 Comment: A_check used once
 A_done 00000048
 
 Symbol: A_done
    Definitions
-      At line 85 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 85 in file Sort_and_Merge.s
    Uses
-      At line 71 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 71 in file Sort_and_Merge.s
 Comment: A_done used once
 A_next 0000003A
 
 Symbol: A_next
    Definitions
-      At line 80 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 80 in file Sort_and_Merge.s
    Uses
-      At line 75 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 75 in file Sort_and_Merge.s
 Comment: A_next used once
 A_swap 00000034
 
 Symbol: A_swap
    Definitions
-      At line 77 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 77 in file Sort_and_Merge.s
    Uses
       None
 Comment: A_swap unused
@@ -360,18 +360,18 @@ B_begin 0000004A
 
 Symbol: B_begin
    Definitions
-      At line 88 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 88 in file Sort_and_Merge.s
    Uses
-      At line 85 in file ..\..\..\..\..\..\..\Downloads\startup.s
-      At line 102 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 85 in file Sort_and_Merge.s
+      At line 102 in file Sort_and_Merge.s
 
 B_check 00000058
 
 Symbol: B_check
    Definitions
-      At line 93 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 93 in file Sort_and_Merge.s
    Uses
-      At line 106 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 106 in file Sort_and_Merge.s
 Comment: B_check used once
 B_done 00000078
 
@@ -383,23 +383,23 @@ Relocatable symbols
 
 Symbol: B_done
    Definitions
-      At line 108 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 108 in file Sort_and_Merge.s
    Uses
-      At line 94 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 94 in file Sort_and_Merge.s
 Comment: B_done used once
 B_next 0000006A
 
 Symbol: B_next
    Definitions
-      At line 103 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 103 in file Sort_and_Merge.s
    Uses
-      At line 98 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 98 in file Sort_and_Merge.s
 Comment: B_next used once
 B_swap 00000064
 
 Symbol: B_swap
    Definitions
-      At line 100 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 100 in file Sort_and_Merge.s
    Uses
       None
 Comment: B_swap unused
@@ -407,24 +407,24 @@ __main 00000000
 
 Symbol: __main
    Definitions
-      At line 50 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 50 in file Sort_and_Merge.s
    Uses
-      At line 26 in file ..\..\..\..\..\..\..\Downloads\startup.s
-      At line 46 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 26 in file Sort_and_Merge.s
+      At line 46 in file Sort_and_Merge.s
 
 end_copy 00000018
 
 Symbol: end_copy
    Definitions
-      At line 62 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 62 in file Sort_and_Merge.s
    Uses
-      At line 57 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 57 in file Sort_and_Merge.s
 Comment: end_copy used once
 myCode 00000000
 
 Symbol: myCode
    Definitions
-      At line 42 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 42 in file Sort_and_Merge.s
    Uses
       None
 Comment: myCode unused
@@ -432,9 +432,9 @@ start_copy 00000006
 
 Symbol: start_copy
    Definitions
-      At line 56 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 56 in file Sort_and_Merge.s
    Uses
-      At line 61 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 61 in file Sort_and_Merge.s
 Comment: start_copy used once
 stop 0000007A
 
@@ -446,9 +446,9 @@ Symbol: stop
 ARM Macro Assembler    Page 3 Alphabetic symbol ordering
 Relocatable symbols
 
-      At line 113 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 113 in file Sort_and_Merge.s
    Uses
-      At line 114 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 114 in file Sort_and_Merge.s
 Comment: stop used once
 15 symbols
 
@@ -461,25 +461,25 @@ Load$$ER_RW$$Base 00000000
 
 Symbol: Load$$ER_RW$$Base
    Definitions
-      At line 44 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 44 in file Sort_and_Merge.s
    Uses
-      At line 53 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 53 in file Sort_and_Merge.s
 Comment: Load$$ER_RW$$Base used once
 Load$$ER_RW$$Length 00000000
 
 Symbol: Load$$ER_RW$$Length
    Definitions
-      At line 45 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 45 in file Sort_and_Merge.s
    Uses
-      At line 54 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 54 in file Sort_and_Merge.s
 Comment: Load$$ER_RW$$Length used once
 myData$$Base 00000000
 
 Symbol: myData$$Base
    Definitions
-      At line 43 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 43 in file Sort_and_Merge.s
    Uses
-      At line 52 in file ..\..\..\..\..\..\..\Downloads\startup.s
+      At line 52 in file Sort_and_Merge.s
 Comment: myData$$Base used once
 3 symbols
 363 symbols in table
