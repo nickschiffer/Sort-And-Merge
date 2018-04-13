@@ -10,6 +10,7 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -378,6 +379,23 @@
       <Groups>
         <Group>
           <GroupName>Source Group 1</GroupName>
+          <Files>
+            <File>
+              <FileName>Sort_and_Merge.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Sort_and_Merge.s</FilePath>
+            </File>
+            <File>
+              <FileName>sort.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\sort.s</FilePath>
+            </File>
+            <File>
+              <FileName>merge.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\merge.s</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
