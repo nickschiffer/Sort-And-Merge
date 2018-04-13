@@ -3,7 +3,7 @@
 ; Computer Engineering Department
 ; CMPE 102 - Assembly Programming
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;
+; 
 ; Nickolas Schiffer
 ; merge.s
 ;

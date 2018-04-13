@@ -21,9 +21,8 @@ sort	PROC
 PUSH {LR};
 PUSH {r4, r5, r6, r7, r8, r9, r10, r11};
 ;Sort List
-begin	LDR	r4, r0;
-		LDR	r1, r1; 	; Loop Counter Initialization
-		LDR	r2, =listA	; Set Address of Entry 1
+begin	LDR	r4, r0;	; Loop Counter Initialization
+		LDR	r2, r0;	; Set Address of Entry 1
 		ADD	r3, r2, #4	; Address of Entry 2
 check	CMP	r1, #4
 		BEQ	done
