@@ -17,8 +17,8 @@
 		        ALIGN
 sort	PROC
 ; Preserve Registers
-		PUSH {LR};
-		PUSH {r4, r5, r6, r7, r8, r9, r10, r11};
+		PUSH {LR}								; Preserve LR
+		PUSH {r4, r5, r6, r7, r8, r9, r10, r11} ; Preserve Caller Registers
 ;Sort List
 begin	MOV r6, r1
 		MOV	r4, r0		; Loop Counter Initialization
@@ -39,13 +39,21 @@ next	ADD	r2, #4
 		SUB	r6, #4
 		B	check
 
-done	LSL r0, r1, #2
+done	
+
+; Output Paramters
+		LSL r0, r1, #2 ;Convert Size to Number of Elements
+	
+	; Zero-out remaining return Registers
 		MOV r1, #0
 		MOV r2, #0
 		MOV r3, #0
+
+; Restore Caller Registers
 		POP {r4,r5,r6,r7,r8,r9,r10,r11};
 		POP {LR};
-		ADD SP, #8
+		
+; Return to Caller
 		BX LR
 		
 		ENDP
