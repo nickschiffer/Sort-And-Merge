@@ -8,3 +8,6 @@
 
 *.PNG
 *.pdf
+*/Listings/
+*/Objects/
+*.uvmpw
