@@ -42,7 +42,7 @@ next	ADD	r2, #4
 done	
 
 ; Output Paramters
-	LSL r0, r1, #2 		;Convert Size to Number of Elements
+	LSL r0, r1, #2 		; Convert Size to Number of Elements
 	
     ; Zero-out remaining return Registers
 	MOV r1, #0
@@ -50,8 +50,8 @@ done
 	MOV r3, #0
 
 ; Restore Caller Registers
-	POP {r4,r5,r6,r7,r8,r9,r10,r11};
-	POP {LR};
+	POP {r4,r5,r6,r7,r8,r9,r10,r11}
+	POP {LR}
 		
 ; Return to Caller
 	BX LR
