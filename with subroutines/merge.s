@@ -12,13 +12,13 @@
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; Merge Subroutine
 ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		        AREA	merge_sub, CODE
+		AREA	merge_sub, CODE
                 EXPORT	merge
-		        ALIGN
+		ALIGN
 merge	PROC
 ; Preserve Caller Registers
-	PUSH {LR} 				; Preserve LR
-	PUSH {r4, r5, r6, r7, r8, r9, r10, r11} ; Preserve Caller Registers
+	    PUSH {LR} 				    ; Preserve LR
+	    PUSH {r4, r5, r6, r7, r8, r9, r10, r11} ; Preserve Caller Registers
 
 ; Extract Paramters
 	    MOV r7, r0			; Extract Address List A Paramter
@@ -82,7 +82,7 @@ fill_B      CMP   r2, r4		; Check if B still has Elements
 merge_done
 
 ; Output Parameters
-            LSR r0, r8, #2              ;Convert Size to Number of Elements
+            LSR r0, r8, #2              ; Convert Size to Number of Elements
 			
 	; Zero-out remaining return Registers
             MOV r1, #0	
@@ -99,5 +99,5 @@ merge_done
 ; Return to Caller
             BX LR
 	
-		ENDP
-		END
+	    ENDP
+	    END
